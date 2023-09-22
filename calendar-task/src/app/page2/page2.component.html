@@ -1,0 +1,35 @@
+<div>
+    <mat-form-field>
+        <input matInput [matDatepicker]="picker" (dateChange)="onDateChange($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <button mat-raised-button color="primary"  (click)="selectNextDate()">Next Date</button>
+</div>
+
+<div *ngIf="showPopup" class="popup">
+    <!-- Popup content here -->
+
+    <!-- <mat-radio-group [(ngModel)]="selectedOption" #radioGroup="ngModel">
+        <mat-radio-button value="Shift A">Shift A</mat-radio-button>
+        <mat-radio-button value="Shift B">Shift B</mat-radio-button>
+    </mat-radio-group> -->
+    <mat-radio-group [(ngModel)]="selectedOption">
+        <mat-radio-button *ngFor="let option of radioOptions" [value]="option">{{ option }}</mat-radio-button>
+    </mat-radio-group>
+<div>
+    <button mat-raised-button color="primary" (click)="closePopup()">Close</button>
+</div>
+</div>
+
+<div *ngIf="selectedDates.length > 0">
+    <h3>Selected Dates:</h3>
+    <ul>
+        <li *ngFor="let date of selectedDates">
+            {{ date.date | date: 'dd-MM-yyyy' }} - {{ date.option }}
+        </li>
+    </ul>
+</div>
+<div>
+    <button mat-raised-button color="primary"  (click)="navigateToNextPage()">Submit</button>
+    </div>
